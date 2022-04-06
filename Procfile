@@ -1,1 +1,1 @@
-web: gunicorn getconllu:app
+web: gunicorn app:app

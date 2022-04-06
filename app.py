@@ -3,7 +3,6 @@ import spacy
 import spacy_udpipe
 import sys
 import gunicorn
-import en_core_web_sm
 
 app = Flask(__name__)
 

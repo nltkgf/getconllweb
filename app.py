@@ -11,6 +11,7 @@ def index():
     return render_template('index.html')
 
 def getConll(texts):
+    spacy_udpipe.download("en")
     #nlp = spacy.load("en_core_web_sm")
     nlp = spacy_udpipe.load("en")
     from spacy import displacy

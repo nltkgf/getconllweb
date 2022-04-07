@@ -10,12 +10,12 @@
     <textarea id="phrase" rows="10" cols="30"></textarea>
     <button id="submit">conllise</button>
   </div>
-  <div class="result"></div>
+  <div id="result"></div>
+  <button onclick="copy('result')" class="copy">copy</button>
 </body>
 <script>
   $(document).ready(function(){
     $('#form').on('click', '#submit', function(){
-      console.log($("#phrase").val())
        $.ajax({
         url: "/hello",
         type: "get",
@@ -23,12 +23,30 @@
         success: function(response) {
           const replaced = response.result.replace(new RegExp('\r?\n','g'), '<br />')
           console.log(replaced)
-          $(".result").html('<p>'+replaced.toString()+'</p>');
+          $("#result").html('<p>'+replaced.toString()+'</p>')
         },
-       });
-    });
-  });
+       })
+    })
+  })
+  // copy to clipboard from https://stackoverflow.com/questions/22581345/click-button-copy-to-clipboard/30905277#30905277
+  function copy(element_id){
+    var aux = document.createElement("div");
+    aux.setAttribute("contentEditable", true);
+    aux.innerHTML = document.getElementById(element_id).innerHTML;
+    aux.setAttribute("onfocus", "document.execCommand('selectAll',false,null)");
+    document.body.appendChild(aux);
+    aux.focus();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
+  }
 </script>
+<style>
+  #result {
+    border: 1px solid black;
+    width: 30vw;
+    min-height: 20vh;
+  }
+</style>
 
 </html>
 
